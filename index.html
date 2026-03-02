@@ -3,34 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Card</title>
+    <title>Happy Birthday Malak ✨</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffcccb;
-            text-align: center;
-            padding: 50px;
+        *{box-sizing:border-box;margin:0;padding:0}
+
+        body{
+            background:radial-gradient(circle at 20% 30%,#ffdde1,#f9c9b6);
+            min-height:100vh;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            font-family:'Segoe UI',system-ui,sans-serif;
+            padding:20px;
         }
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+
+        .card-wrapper{
+            cursor:pointer;
+            perspective:1400px;
+            width:100%;
+            max-width:600px;
+            margin-bottom:32px;
         }
-        h1 {
-            color: #ff69b4;
+
+        .envelope{
+            background:#fbd5a2;
+            border-radius:30px;
+            padding:28px 24px 38px;
+            border:3px solid #e7a567;
+            box-shadow:0 28px 28px -12px #a86132;
+            transition:.45s;
         }
-        p {
-            font-size: 18px;
-            color: #333;
+
+        .closed-face{
+            background:#fff1dc;
+            border-radius:26px;
+            padding:32px 16px 28px;
+            text-align:center;
+        }
+
+        .closed-face h1{
+            font-size:2.8rem;
+            color:#aa3e2a;
+            margin-bottom:10px;
+            font-family:'Brush Script MT',cursive;
+        }
+
+        .closed-face p{
+            font-size:1.6rem;
+            color:#b14f32;
+            border-top:2px dotted #eaac77;
+            padding-top:14px;
+        }
+
+        .birthday-inside{display:none}
+
+        .envelope.open .closed-face{display:none}
+        .envelope.open .birthday-inside{display:block}
+
+        .inside-card{
+            background:#fffef7;
+            border-radius:30px;
+            padding:30px 18px 38px;
+            text-align:center;
+            border:2px solid #eba45e;
+        }
+
+        .inside-card h1{
+            font-size:3.4rem;
+            color:#b83b1e;
+            font-family:'Brush Script MT',cursive;
+        }
+
+        .main-message{
+            font-size:2.2rem;
+            color:#bc4e2c;
+            margin:12px 0;
+        }
+
+        .from-text{
+            margin-top:28px;
+            font-size:1.5rem;
+            color:#8b3e1f;
+            font-style:italic;
+        }
+
+        .link-container{
+            background:rgba(253,241,226,.9);
+            border-radius:60px;
+            padding:18px 24px;
+            width:100%;
+            max-width:600px;
+            display:flex;
+            gap:14px;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .fake-link{
+            background:#fcf3e6;
+            padding:12px 20px;
+            border-radius:50px;
+            border:2px solid #dba159;
+            font-family:monospace;
+            font-size:1.2rem;
+            cursor:pointer;
+        }
+
+        footer{
+            margin-top:24px;
+            font-size:1.1rem;
+            color:#914e27;
         }
     </style>
 </head>
+
 <body>
-    <div class="card">
-        <h1>Happy Birthday!</h1>
-        <p>Wishing you a day filled with love, joy, and celebration!</p>
+
+<div class="card-wrapper" id="card">
+    <div class="envelope" id="envelope">
+
+        <div class="closed-face">
+            <h1>for malak 💌</h1>
+            <p>tap to open ✨</p>
+        </div>
+
+        <div class="birthday-inside">
+            <div class="inside-card">
+                <h1>Happy Birthday 🎂</h1>
+                <div class="main-message">to you, Malak 💖</div>
+                <div style="font-size:2.5rem">🥳🎈✨</div>
+
+                <!-- from mohanad -->
+                <div class="from-text">
+                    with love,<br>
+                    <strong>from Mohanad 💖</strong>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
+
+<div class="link-container">
+    <div class="fake-link" id="magicLink">
+        happybirthday.malak/✨click✨
+    </div>
+</div>
+
+<footer>
+    click the card & share the link 💫
+</footer>
+
+<script>
+    const envelope=document.getElementById("envelope");
+    document.getElementById("card").onclick=()=>envelope.classList.toggle("open");
+
+    const link=document.getElementById("magicLink");
+    const texts=[
+        "happybirthday.malak/🎂",
+        "for-malak-with-love💖",
+        "malak-birthday✨",
+        "from-mohanad💫"
+    ];
+    let i=0;
+    link.onclick=()=>{
+        i=(i+1)%texts.length;
+        link.textContent=texts[i];
+    };
+</script>
+
 </body>
 </html>
