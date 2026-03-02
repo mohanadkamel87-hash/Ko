@@ -110,6 +110,48 @@
             font-family:monospace;
             font-size:1.2rem;
             cursor:pointer;
+            transition:all 0.3s ease;
+        }
+
+        .fake-link:hover{
+            background:#ffd4a3;
+            transform:scale(1.05);
+            box-shadow:0 4px 12px rgba(255,150,100,0.3);
+        }
+
+        .gift-btn{
+            background:linear-gradient(135deg,#e63946,#ff006e);
+            color:white;
+            padding:14px 28px;
+            border-radius:50px;
+            border:none;
+            font-size:1.1rem;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            box-shadow:0 4px 15px rgba(230,57,70,0.3);
+        }
+
+        .gift-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 6px 20px rgba(230,57,70,0.5);
+        }
+
+        .copy-notification{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:#4caf50;
+            color:white;
+            padding:12px 20px;
+            border-radius:50px;
+            font-size:1rem;
+            opacity:0;
+            transition:opacity 0.3s ease;
+            z-index:1000;
+        }
+
+        .copy-notification.show{
+            opacity:1;
         }
 
         footer{
@@ -119,23 +161,19 @@
         }
     </style>
 </head>
-
 <body>
 
 <div class="card-wrapper" id="card">
     <div class="envelope" id="envelope">
-
         <div class="closed-face">
             <h1>for malak 💌</h1>
             <p>tap to open ✨</p>
         </div>
-
         <div class="birthday-inside">
             <div class="inside-card">
                 <h1>Happy Birthday 🎂</h1>
                 <div class="main-message">to you, Malak 💖</div>
                 <div style="font-size:2.5rem">🥳🎈✨</div>
-
                 <!-- from mohanad -->
                 <div class="from-text">
                     with love,<br>
@@ -143,7 +181,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -151,11 +188,14 @@
     <div class="fake-link" id="magicLink">
         happybirthday.malak/✨click✨
     </div>
+    <button class="gift-btn" id="giftBtn">🎁 Open Gift</button>
 </div>
 
 <footer>
     click the card & share the link 💫
 </footer>
+
+<div class="copy-notification" id="notification">Link copied to clipboard! 📋</div>
 
 <script>
     const envelope=document.getElementById("envelope");
@@ -172,8 +212,24 @@
     link.onclick=()=>{
         i=(i+1)%texts.length;
         link.textContent=texts[i];
+        navigator.clipboard.writeText(window.location.href).then(()=>{
+            const notification=document.getElementById("notification");
+            notification.classList.add("show");
+            setTimeout(()=>notification.classList.remove("show"),2000);
+        });
+    };
+
+    const giftBtn=document.getElementById("giftBtn");
+    const giftLinks=[
+        "https://www.amazon.com/s?k=gift+cards",
+        "https://www.etsy.com/search?q=gifts",
+        "https://www.target.com/s?searchTerm=gifts",
+        "https://www.walmart.com/search?query=gifts"
+    ];
+    giftBtn.onclick=()=>{
+        const randomLink=giftLinks[Math.floor(Math.random()*giftLinks.length)];
+        window.open(randomLink,"_blank");
     };
 </script>
-
 </body>
 </html>
